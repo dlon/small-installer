@@ -1,0 +1,33 @@
+[package]
+name = "gpg-verify"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "*"
+#base64 = "0.22.1"
+pgp = "0.14.0"
+reqwest = { version = "0.12.9", features = ["blocking"] }
+windows-sys = { version = "0.59", features = ["Win32_Graphics_Gdi", "Win32_UI", "Win32_UI_Controls", "Win32_UI_WindowsAndMessaging"] }
+#ring = "0.17.8"
+#rsa = "0.9.7"
+#sha2 = "0.10.8"
+#tempfile = "3.14.0"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59" }
+
+[build-dependencies]
+winres = "0.1"
+anyhow = "1.0"
+windows-sys = { version = "0.52.0", features = ["Win32_System", "Win32_System_LibraryLoader", "Win32_System_SystemServices"] }
+
+[package.metadata.winres]
+LegalCopyright = "(c) 2024 Mullvad VPN AB"
+
+[profile.release]
+strip = true
+opt-level = 'z'
+codegen-units = 1
+lto = true
+panic = 'abort'
